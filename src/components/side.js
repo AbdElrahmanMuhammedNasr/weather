@@ -1,32 +1,39 @@
 import React, { Component } from 'react'
 import image from '../assets/eg.png'
-import Country from '../UI/country'
-import sun from '../assets/sun.png'
+import Country from '../UI/sideBar/country'
+import CurrentLocation from '../UI/sideBar/currentlocation';
 
+
+//  liberary
 import { countries } from "country-flags-svg";
-
+//  end
 
 class Side extends Component {
     Allcountries = [...countries]
 
     state = {
-        countries:[... this.Allcountries]
+        countries: [...countries]
     }
 
 
     searchCountry = (event) => {
 
-        console.log(event.target.value)
+        // console.log(event.target.value)
 
         const new_country = this.Allcountries.filter(c => {
             return c.name.toUpperCase().startsWith(event.target.value.toUpperCase());
-            })
+        })
 
         this.setState(
             {
                 countries: new_country
             }
         )
+    }
+
+    countryClick = (event, countryName) => {
+        console.log(countryName)
+
     }
 
 
@@ -50,8 +57,8 @@ class Side extends Component {
                         {
                             this.state.countries.map((country, index) => {
                                 return (
-                                    < >
-                                        <Country countryInfo={country} />
+                                    <>
+                                        <Country countryInfo={country} key={index} clicked={(event) => this.countryClick(event, country.name)} />
 
                                     </>
                                 )
@@ -60,13 +67,7 @@ class Side extends Component {
                     </div>
 
                     <div>
-                        <div className="card"  >
-                            <div className="card-body">
-                                <h5 className="card-title font-weight-bold">Egypt   - <span className='font-weight-light'> 33 </span>  </h5>
-                                <img className=' rounded-circle ' style={{ width: '90px', height: '90px' }} src={sun} />
-                                <p className="card-text font-weight-bold ">sunny    </p>
-                            </div>
-                        </div>
+                        <CurrentLocation />
                     </div>
 
                 </div>

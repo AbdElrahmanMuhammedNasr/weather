@@ -1,6 +1,7 @@
 import React ,{ Component } from 'react'
 
 import Side from './components/side';
+import Main from './components/main';
 
 
 class App extends Component {
@@ -15,8 +16,8 @@ class App extends Component {
         </div>
 
 
-        <div className='col-10' style={{backgroundColor:'blue',height:'100px'}}>
-          buy
+        <div className='col-10' style={{backgroundColor:'blue',height:'100vh'}}>
+          <Main />
         </div>
       </div>
     ) 
