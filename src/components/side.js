@@ -9,6 +9,13 @@ import { countries } from "country-flags-svg";
 //  end
 
 class Side extends Component {
+
+
+    componentDidMount() {
+        this.inputElement.focus();
+    }
+
+
     Allcountries = [...countries]
 
     state = {
@@ -31,8 +38,11 @@ class Side extends Component {
         )
     }
 
-    countryClick = (event, countryName) => {
-        console.log(countryName)
+    countryClick = (event, country) => {
+        console.log(country.name)
+        console.log(country.iso2)
+        console.log(country.iso3)
+
 
     }
 
@@ -40,7 +50,8 @@ class Side extends Component {
     render() {
 
         const scrollStyle = {
-            height: "66vh",
+            // height: "66vh",
+            height: "90vh",
             overflow: 'scroll',
             margin: '10px 0px'
 
@@ -49,7 +60,9 @@ class Side extends Component {
         return (
             <div style={{ marginTop: '20px' }}>
                 <div className="form-group">
-                    <input type="text" className="form-control" placeholder="search" onChange={(event) => this.searchCountry(event)} />
+                    <input
+                        ref={(i) => this.inputElement = i} // foucs
+                        type="text" className="form-control" placeholder="search" onChange={(event) => this.searchCountry(event)} />
 
                     <div style={scrollStyle}>
 
@@ -58,7 +71,7 @@ class Side extends Component {
                             this.state.countries.map((country, index) => {
                                 return (
                                     <>
-                                        <Country countryInfo={country} key={index} clicked={(event) => this.countryClick(event, country.name)} />
+                                        <Country countryInfo={country} key={index} clicked={(event) => this.countryClick(event, country)} />
 
                                     </>
                                 )
@@ -66,9 +79,9 @@ class Side extends Component {
                         }
                     </div>
 
-                    <div>
+                    {/* <div>
                         <CurrentLocation />
-                    </div>
+                    </div> */}
 
                 </div>
             </div>
